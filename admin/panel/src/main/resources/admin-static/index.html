@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypnosia Admin</title>
+    <script type="module" crossorigin src="./assets/index-DhI_cmHZ.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-f3KQnCBF.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const nav = document.querySelector('aside nav');
+          if (!nav) return;
+          const riLink = document.createElement('a');
+          riLink.href = '/role-icons-page';
+          riLink.className = 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-all duration-150 text-left text-[#8A8A9A] hover:bg-[#1A1A24] hover:text-[#F0F0F5]';
+          riLink.innerHTML = '<svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Role Icons</span>';
+          nav.appendChild(riLink);
+
+          const regLink = document.createElement('a');
+          regLink.href = '/register-page';
+          regLink.className = 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-all duration-150 text-left text-[#8A8A9A] hover:bg-[#1A1A24] hover:text-[#F0F0F5]';
+          regLink.innerHTML = '<svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg><span>Register</span>';
+          nav.appendChild(regLink);
+        }, 300);
+      });
+    </script>
+  </body>
+</html>

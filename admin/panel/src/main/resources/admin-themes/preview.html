@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypnosia Admin — Theme Preview</title>
+<link id="theme" rel="stylesheet" href="dark-cyber.css">
+<style>
+  .theme-bar {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 9999;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .theme-bar button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+  }
+  .theme-bar button.active {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <button class="active" onclick="setTheme('dark-cyber.css',this)">Dark Cyber</button>
+  <button onclick="setTheme('light-professional.css',this)">Light Pro</button>
+  <button onclick="setTheme('glassmorphism.css',this)">Glass</button>
+  <button onclick="setTheme('midnight-premium.css',this)">Midnight</button>
+</div>
+
+<div class="hero">
+  <div>
+    <h1>Hypnosia Admin</h1>
+    <p>Accounts, role keys &amp; cloud configs</p>
+  </div>
+  <div class="hero-actions">
+    <a href="#">Debug logs 24h</a>
+    <form><button>Backup now</button></form>
+  </div>
+</div>
+
+<div class="notice ok">Backup completed successfully</div>
+<div class="notice err">Failed to delete account #3</div>
+
+<div class="stats">
+  <div><b>Accounts</b><span>142</span></div>
+  <div><b>Active</b><span>98</span></div>
+  <div><b>Online</b><span>23</span></div>
+  <div><b>Role keys</b><span>512</span></div>
+  <div><b>Bound</b><span>387</span></div>
+  <div><b>Cloud configs</b><span>1,204</span></div>
+</div>
+
+<div class="card">
+  <h2>Send notification</h2>
+  <form class="notify-grid">
+    <input type="text" placeholder="Message (max 240 chars)" value="">
+    <button>Send to online (23)</button>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Accounts</h2>
+  <form class="search-grid">
+    <input type="text" placeholder="Search by ID, name, contact or HWID...">
+    <button>Search</button>
+    <a href="#" class="muted">Clear</a>
+  </form>
+  <form class="create-grid">
+    <div class="field"><label>Display name</label><input placeholder="Optional"></div>
+    <div class="field"><label>HWID hash</label><input placeholder="64-char hex"></div>
+    <div class="field"><label>Contact</label><input placeholder="Optional"></div>
+    <button>Create</button>
+  </form>
+  <div class="table">
+    <div class="row head account-row">
+      <div>ID</div><div>Name</div><div>Contact</div><div>Status</div>
+      <div>HWID</div><div>Roles</div><div>Cloud</div><div>Last seen</div><div>Actions</div>
+    </div>
+    <div class="row account-row">
+      <div><a href="#">#42</a></div>
+      <div>Nachosia</div>
+      <div>@Nachosia_repo</div>
+      <div><span class="pill bound">active</span></div>
+      <div><code class="muted">a3f7..9e2d</code></div>
+      <div><span class="pill">OWNER</span> <span class="pill">ADMIN</span></div>
+      <div>12 / 100</div>
+      <div>2 min ago</div>
+      <div class="actions">
+        <a class="button" href="#">Details</a>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+    <div class="row account-row">
+      <div><a href="#">#7</a></div>
+      <div>test_user</div>
+      <div class="muted">—</div>
+      <div><span class="pill not-bound">offline</span></div>
+      <div><code class="muted">b8e1..4c5a</code></div>
+      <div><span class="pill">USER</span></div>
+      <div>1 / 3</div>
+      <div>3 hours ago</div>
+      <div class="actions">
+        <a class="button" href="#">Details</a>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+    <div class="row account-row">
+      <div><a href="#">#91</a></div>
+      <div class="muted">—</div>
+      <div class="muted">—</div>
+      <div><span class="pill disabled">disabled</span></div>
+      <div class="muted">—</div>
+      <div class="muted">—</div>
+      <div class="muted">—</div>
+      <div class="muted">—</div>
+      <div class="actions">
+        <a class="button" href="#">Details</a>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Role keys</h2>
+  <form class="create-grid">
+    <div class="field"><label>Role</label><select><option>USER</option><option>SPONSOR</option><option>QA</option><option>ADMIN</option><option>OWNER</option></select></div>
+    <div class="field"><label>Cloud limit</label><input type="number" value="3"></div>
+    <div class="field"><label>Expires</label><input type="date"></div>
+    <button>Create</button>
+  </form>
+  <div class="table">
+    <div class="row head role-row">
+      <div>License key</div><div>Role</div><div>Bound</div><div>Status</div><div>Expires</div><div>Account</div><div>Actions</div>
+    </div>
+    <div class="row role-row">
+      <div><code>A1B2C3D4E5F6..</code></div>
+      <div><span class="pill">OWNER</span></div>
+      <div><span class="pill bound">yes</span></div>
+      <div><span class="pill bound">active</span></div>
+      <div class="muted">never</div>
+      <div><a href="#">#42</a></div>
+      <div class="actions">
+        <form><button>Edit</button></form>
+        <form><button>Reset HWID</button></form>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+    <div class="row role-row">
+      <div><code>X9Y8Z7W6V5U4..</code></div>
+      <div><span class="pill">SPONSOR</span></div>
+      <div><span class="pill not-bound">no</span></div>
+      <div><span class="pill not-bound">unbound</span></div>
+      <div class="muted">2026-06-01</div>
+      <div class="muted">—</div>
+      <div class="actions">
+        <form><button>Edit</button></form>
+        <form><button>Reset HWID</button></form>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Cloud configs</h2>
+  <div class="table">
+    <div class="row head cloud-row">
+      <div>Key</div><div>Name</div><div>Owner</div><div>Size</div><div>Status</div><div>Actions</div>
+    </div>
+    <div class="row cloud-row">
+      <div><code>ABCD1234</code></div>
+      <div>rage_main.cfg</div>
+      <div><a href="#">#42</a></div>
+      <div>14 KB</div>
+      <div><span class="pill bound">enabled</span></div>
+      <div class="actions">
+        <a class="button" href="#">Download</a>
+        <form><button>Disable</button></form>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+    <div class="row cloud-row">
+      <div><code>EFGH5678</code></div>
+      <div>legit_v2.cfg</div>
+      <div><a href="#">#7</a></div>
+      <div>8 KB</div>
+      <div><span class="pill disabled">disabled</span></div>
+      <div class="actions">
+        <a class="button" href="#">Download</a>
+        <form><button>Enable</button></form>
+        <form><button class="danger">Delete</button></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function setTheme(href, btn) {
+  document.getElementById('theme').href = href;
+  document.querySelectorAll('.theme-bar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

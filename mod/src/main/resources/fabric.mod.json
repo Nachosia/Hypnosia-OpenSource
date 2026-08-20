@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "hypnosia",
+  "version": "${version}",
+  "name": "Hypnosia",
+  "description": "Client-side visual and UI foundation for Hypnosia.",
+  "authors": [
+    "Hypnosia"
+  ],
+  "license": "Hypnosia-Source-Available-Personal-Use",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "dev.hypnosia.HypnosiaClient"
+      }
+    ]
+  },
+  "mixins": [
+    "hypnosia.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.1",
+    "fabric-language-kotlin": ">=1.13.10+kotlin.2.3.20",
+    "fabric-api": "*",
+    "minecraft": "~1.21.11",
+    "java": ">=21"
+  }
+}

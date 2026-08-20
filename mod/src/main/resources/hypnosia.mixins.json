@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "dev.hypnosia.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "EntityRendererMixin",
+    "FogRendererMixin",
+    "GameRendererMixin",
+    "InGameHudMixin",
+    "OverlayTextureAccessor",
+    "PlayerEntityRendererMixin",
+    "PlayerListHudMixin",
+    "SimpleOptionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

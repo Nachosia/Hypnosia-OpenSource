@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация — Hypnosia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #050505;
+      color: #e5e5e5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .card {
+      width: 698px;
+      height: 464px;
+      background: #0D0D0D;
+      border-radius: 12px;
+      border: 1px solid #222;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .content { max-width: 500px; width: 100%; margin: 0 auto; height: 100%; display: flex; flex-direction: column; }
+    .header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .header svg { width: 20px; height: 20px; color: #4f46e5; flex-shrink: 0; }
+    .header h2 {
+      color: #888;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .alert {
+      background: #121212;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .alert svg { width: 20px; height: 20px; color: #4f46e5; flex-shrink: 0; margin-top: 2px; }
+    .alert span { color: #ccc; font-weight: 500; }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 8px;
+    }
+    .checkbox input { display: none; }
+    .check-box {
+      width: 20px; height: 20px;
+      border-radius: 4px;
+      border: 1px solid #333;
+      background: #151515;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .checkbox:hover .check-box { border-color: rgba(79,70,229,0.5); }
+    .checkbox input:checked + .check-box {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      box-shadow: 0 0 10px rgba(79,70,229,0.5);
+    }
+    .check-box svg { width: 12px; height: 12px; color: #fff; opacity: 0; transition: opacity 0.2s; }
+    .checkbox input:checked + .check-box svg { opacity: 1; }
+    .checkbox-text {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+    .checkbox:hover .checkbox-text { color: #888; }
+    .btn {
+      width: 100%;
+      padding: 16px;
+      margin-top: auto;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:disabled {
+      background: #151515;
+      color: #444;
+      border: 1px solid #222;
+      cursor: not-allowed;
+    }
+    .btn:not(:disabled) {
+      background: #4f46e5;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(79,70,229,0.3);
+    }
+    .btn:not(:disabled):hover { background: #5a52ff; }
+    .btn:not(:disabled):active { transform: scale(0.98); }
+
+    /* Profile */
+    .profile { display: none; flex-direction: column; height: 100%; }
+    .profile.active { display: flex; }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #121212;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #1a1a1a;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .info-row span:first-child { color: #666; }
+    .info-row span:last-child { color: #e5e5e5; font-weight: 500; }
+    .roles-label { color: #666; font-size: 13px; margin: 8px 0 12px 4px; }
+    .roles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .role {
+      padding: 4px 12px;
+      background: #151515;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #ccc;
+      transition: all 0.2s;
+    }
+    .role:hover { background: #1a1a1a; border-color: #3a3a3a; }
+    .role-gold {
+      background-image: linear-gradient(to right, #FFD700 0%, #FFF8DC 50%, #FFD700 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 3s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(255,215,0,0.6));
+    }
+    .role-red {
+      background-image: linear-gradient(to right, #FF3333 0%, #FFAAAA 50%, #FF3333 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 3s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(255,51,51,0.6));
+    }
+    .role-cyan {
+      background-image: linear-gradient(to right, #00E5FF 0%, #E0FFFF 50%, #00E5FF 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 3s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(0,229,255,0.6));
+    }
+    .role-orange {
+      background-image: linear-gradient(to right, #FFA500 0%, #FFD700 50%, #FFA500 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 3s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(255,165,0,0.6));
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    .inputs { display: flex; gap: 16px; margin-bottom: 24px; }
+    .inputs input {
+      flex: 1;
+      background: #151515;
+      color: #e5e5e5;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .inputs input::placeholder { color: #555; }
+    .inputs input:focus {
+      background: #1a1a1a;
+      border-color: rgba(79,70,229,0.3);
+      box-shadow: 0 0 0 1px rgba(79,70,229,0.3);
+    }
+    .footer-box {
+      margin-top: auto;
+      background: #121212;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #1a1a1a;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .footer-box span { color: #aaa; }
+    .contacts { display: flex; justify-content: space-between; margin-top: 4px; color: #888; }
+    .contacts span { cursor: pointer; transition: color 0.2s; }
+    .contacts span:hover { color: #e5e5e5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="content">
+      <!-- Registration -->
+      <div id="register-view" class="flex-col" style="display:flex; flex-direction:column; height:100%; justify-content:center; padding-bottom:16px;">
+        <div class="header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          <h2>Регистрация аккаунта</h2>
+        </div>
+        <div class="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>При регистрации вы подтверждаете согласие на привязку вашего <span>HWID</span> устройства и сбор статистики о <span>времени в игре</span>.</div>
+        </div>
+        <label class="checkbox" style="margin-top:8px;">
+          <input type="checkbox" id="agree">
+          <div class="check-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="checkbox-text">Я согласен с условиями использования HWID и учетом времени</span>
+        </label>
+        <button class="btn" id="register-btn" disabled>Создать аккаунт</button>
+      </div>
+
+      <!-- Profile -->
+      <div id="profile-view" class="profile">
+        <div class="header" style="margin-bottom:32px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <h2>Профиль аккаунта</h2>
+        </div>
+        <div class="info-row"><span>ID Аккаунта:</span><span id="acc-id">1</span></div>
+        <div class="info-row"><span>Дата создания:</span><span id="acc-date">2026-05-21</span></div>
+        <div class="roles-label">Назначенные роли:</div>
+        <div class="roles">
+          <div class="role"><span class="role-gold">Owner</span></div>
+          <div class="role"><span class="role-red">Admin</span></div>
+          <div class="role"><span class="role-cyan">QA</span></div>
+          <div class="role"><span class="role-orange">SPONSOR</span></div>
+          <div class="role">USER</div>
+        </div>
+        <div class="inputs">
+          <input type="text" id="display-name" placeholder="Введите имя...">
+          <input type="text" id="contact" placeholder="Введите контакт...">
+        </div>
+        <div class="footer-box">
+          <p style="margin-bottom:8px;">Без привязанного аккаунта <span>TG</span> или <span>DC</span> восстановление невозможно.</p>
+          <div>Для переноса обращайтесь:</div>
+          <div class="contacts">
+            <span>DS: nachosia</span>
+            <span>TG: @Hypnosia_NSXS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const agree = document.getElementById('agree');
+    const btn = document.getElementById('register-btn');
+    const regView = document.getElementById('register-view');
+    const profView = document.getElementById('profile-view');
+
+    agree.addEventListener('change', () => {
+      btn.disabled = !agree.checked;
+    });
+
+    btn.addEventListener('click', () => {
+      if (!agree.checked) return;
+      // Here you can add API call to create account
+      regView.style.display = 'none';
+      profView.classList.add('active');
+    });
+  </script>
+</body>
+</html>
